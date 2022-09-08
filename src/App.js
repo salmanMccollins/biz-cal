@@ -3,11 +3,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
 import { useEffect, useState } from "react";
 import ScratchCard from "react-scratchcard";
+import IntlTelInput from "react-intl-tel-input";
+import "react-intl-tel-input/dist/main.css";
 
 function App() {
   const [isSwitchOn, setIsSwitchOn] = useState(false);
   const [activity, setActivity] = useState("");
-  const [shareHolders, setShareHolders] = useState(0);
+  const [shareHolders, setShareHolders] = useState(5);
   const [visa, setVisa] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,6 +19,10 @@ function App() {
   const [step3, setstep3] = useState(false);
   const [val, setVal] = useState("");
   const [redNote, setRedNote] = useState("");
+
+  const processNumber = (isValid, phone, country) => {
+    return `+${country.dialCode} ${phone}`;
+  };
 
   var result = [];
 
@@ -714,24 +720,38 @@ function App() {
             </Form.Group>
             <div className="mt-3 nbr-div-1">
               <label>No of ShareHolders</label>
-              <input
+              {/* <input
                 type="number"
                 min={1}
                 max={50}
                 onChange={(e) => {
                   setShareHolders(e.target.value);
                 }}
-              />
+              /> */}
+              <Form.Select
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setShareHolders(e.target.value);
+                }}
+                style={{ width: "40%" }}
+              >
+                <option value={5}>Upto 5</option>
+                <option value={7}>Upto 7</option>
+                <option value={10}>Upto 10</option>
+                <option value={50}>Upto 50</option>
+              </Form.Select>
             </div>
             <div className="mt-3 nbr-div-1">
               <label>No of Visa</label>
               <input
                 type="number"
+                className="cst-input"
                 min={0}
                 max={50}
                 onChange={(e) => {
                   setVisa(e.target.value);
                 }}
+                style={{ width: "40%" }}
               />
             </div>
             <p style={{ color: "red" }}>{redNote}</p>
@@ -758,10 +778,16 @@ function App() {
             >
               <img src="assets/back.png" width={"15px"} />
             </div>
+            <h2>
+              One more
+              <br />
+              step to go!
+            </h2>
             <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Your Name</Form.Label>
               <Form.Control
-                type="name"
+                className="cst-input2"
+                type="text"
+                name="name"
                 placeholder="Your Name"
                 onChange={(e) => {
                   setName(e.target.value);
@@ -769,25 +795,34 @@ function App() {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
               <Form.Control
+                className="cst-input2"
                 type="email"
-                placeholder="Enter email"
+                name="email"
+                placeholder="Enter Email"
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPhone">
-              <Form.Label>Phone Number</Form.Label>
+            {/* <Form.Group className="mb-3" controlId="formBasicPhone">
               <Form.Control
+                className="cst-input2"
                 type="number"
-                placeholder="Enter Phone Number"
+                name="phone"
                 onChange={(e) => {
                   setPhone(e.target.value);
                 }}
               />
-            </Form.Group>
+            </Form.Group> */}
+            <IntlTelInput
+              containerClassName="intl-tel-input"
+              inputClassName="form-control"
+              placeholder="Enter Phone Number"
+              onPhoneNumberChange={(isValid, phone, country) => {
+                setPhone(processNumber(isValid, phone, country));
+              }}
+            />
 
             <p style={{ color: "red" }}>{redNote}</p>
             <div className="btn-div-01 mt-3">

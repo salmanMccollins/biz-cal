@@ -25,7 +25,7 @@
 }
 
 .small-circle {
-  background-color: #97c6ca9f;
+  background-color: #6e62976e;
   height: 15px;
   width: 15px;
   border-radius: 50%;
@@ -132,4 +132,64 @@
   .prt-all-circle {
     justify-content: center;
   }
+}
+
+
+.form-box .cst-input {
+      background: transparent;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    padding: 0 10px;
+}
+
+.form-box .cst-input:focus {
+    outline: 0 none;
+}
+
+
+.form-box .cst-input2 {
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    padding: 0 10px;
+    height: 50px;
+}
+
+.form-box .cst-input2:focus {
+  background: transparent;
+  color: #fff;
+}
+.form-box .cst-input2 {
+  color: #fff;
+}
+
+.form-box .cst-input2::placeholder {
+  color: #fff;
+}
+
+.form-box h2 {
+  text-align: center;
+    font-size: 35px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.intl-tel-input {
+  width: 100%;
+}
+
+.intl-tel-input input {
+  background: transparent;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    padding: 0 10px;
+    height: 50px;
+}
+
+.intl-tel-input input::placeholder {
+  color: #fff;
+}
+
+.intl-tel-input .country-list li {
+  color: #000;
 }
