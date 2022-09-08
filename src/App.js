@@ -295,6 +295,36 @@ function App() {
     },
   ];
 
+  const MainlandStandard = [
+    {
+      visa: 0,
+      DED: 19925,
+    },
+    {
+      visa: 1,
+      DED: 22425,
+    },
+    {
+      visa: "1+",
+      DED: 19925,
+    },
+  ];
+
+  const MainlandTrading = [
+    {
+      visa: 0,
+      DED: 20425,
+    },
+    {
+      visa: 1,
+      DED: 22925,
+    },
+    {
+      visa: "1+",
+      DED: 20425,
+    },
+  ];
+
   const next1 = (e) => {
     e.preventDefault();
 
@@ -353,21 +383,35 @@ function App() {
   };
 
   function selectHandler(item) {
-    standardActivity.find((element) => {
-      if (element === item) {
-        setActivity("Standard Activity");
-      }
-    });
-    mediaActivity.find((element) => {
-      if (element === item) {
-        setActivity("Media Activity");
-      }
-    });
-    generalActivity.find((element) => {
-      if (element === item) {
-        setActivity("General Activity");
-      }
-    });
+    if (!isSwitchOn) {
+      standardActivity.find((element) => {
+        if (element === item) {
+          setActivity("Standard Activity");
+        }
+      });
+      mediaActivity.find((element) => {
+        if (element === item) {
+          setActivity("Media Activity");
+        }
+      });
+      generalActivity.find((element) => {
+        if (element === item) {
+          setActivity("General Activity");
+        }
+      });
+    }
+    if (isSwitchOn) {
+      mainland1.find((element) => {
+        if (element === item) {
+          setActivity("Mainland Standard Activity");
+        }
+      });
+      mainland2.find((element) => {
+        if (element === item) {
+          setActivity("Mainland Trading Activity");
+        }
+      });
+    }
   }
 
   const formhandler = (e) => {
@@ -420,12 +464,32 @@ function App() {
       }
     }
 
+    if (activity == "Mainland Standard Activity") {
+      result = MainlandStandard.find((element) => {
+        return element.visa == visaTemp;
+      });
+
+      result.DED = result.DED + shareHolders * 1575;
+    }
+    if (activity == "Mainland Trading Activity") {
+      result = MainlandTrading.find((element) => {
+        return element.visa == visaTemp;
+      });
+
+      result.DED = result.DED + shareHolders * 1575;
+    }
+
     setTimeout(() => {
       console.log(result);
       // setVal({ meydan: result.meydan });
     }, 2000);
 
-    setVal({ meydan: result.meydan, shams: result.shams, spc: result.spc });
+    if (!isSwitchOn) {
+      setVal({ meydan: result.meydan, shams: result.shams, spc: result.spc });
+    }
+    if (isSwitchOn) {
+      setVal({ DED: result.DED });
+    }
   };
 
   var arr = [
@@ -572,20 +636,20 @@ function App() {
           <div className="row pl-div">
             <div className="progress-line"></div>
           </div>
-          <div className="row">
-            <div className="col-md-4 all-circle">
+          <div className="row prt-all-circle">
+            <div className="col-sm-4 all-circle">
               <div className="circle-div">
                 <div className="small-circle active" id="sc-1"></div>
               </div>
               <p>Step 1</p>
             </div>
-            <div className="col-md-4 all-circle">
+            <div className="col-sm-4 all-circle">
               <div className="circle-div">
                 <div className="small-circle " id="sc-2"></div>
               </div>
               <p>Step 2</p>
             </div>
-            <div className="col-md-4 all-circle">
+            <div className="col-sm-4 all-circle">
               <div className="circle-div">
                 <div className="small-circle" id="sc-3"></div>
               </div>
@@ -762,21 +826,39 @@ function App() {
               <div>{visa}</div>
             </div>
 
-            <div className="d-flex result-row">
+            <div
+              className=" result-row"
+              style={{ display: isSwitchOn ? "none" : "flex" }}
+            >
               <div>Pirce for Meydan</div>
               <div>{val.meydan}</div>
             </div>
             {val.spc >= val.shams ? (
-              <div className="d-flex result-row">
+              <div
+                className="result-row"
+                style={{ display: isSwitchOn ? "none" : "flex" }}
+              >
                 <div>Pirce for SPC</div>
                 <div>{val.spc}</div>
               </div>
             ) : (
-              <div className="d-flex result-row">
+              <div
+                className=" result-row"
+                style={{ display: isSwitchOn ? "none" : "flex" }}
+              >
                 <div>Pirce for Shams</div>
                 <div>{val.shams}</div>
               </div>
             )}
+
+            <div
+              className=" result-row"
+              style={{ display: isSwitchOn ? "flex" : "none" }}
+            >
+              <div>Pirce for DED</div>
+              <div>{val.DED}</div>
+            </div>
+
             <div className="scrach-card">
               <ScratchCard {...settings}>{randomize(arr)}</ScratchCard>
             </div>

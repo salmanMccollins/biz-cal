@@ -1,7 +1,7 @@
 
 .App {
   overflow: hidden;
-  width: 40%;
+  /* width: 40%; */
   background: #E2E0E1;
 }
 .all-circle {
@@ -55,7 +55,8 @@
 }
 
 .form-box {
-  width: 450px;
+  min-width: 300px;
+  max-width: 450px;
   padding: 20px;
   margin: auto;
   margin-top: 20px;
@@ -72,7 +73,7 @@
 .form-box .switch-001 .form-check-input {
     width: 3em !important;
     height: 1.5em !important;
-    margin-top: 0;
+    margin-top: 15px;
 }
 
 .nbr-div-1 {
@@ -121,4 +122,14 @@
 .scrach-card {
     margin: 20px;
     text-align: -webkit-center;
+}
+
+@media (max-width: 580px) {
+  .step-div .all-circle {
+    width: 30%;
+  }
+
+  .prt-all-circle {
+    justify-content: center;
+  }
 }
