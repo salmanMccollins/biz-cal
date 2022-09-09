@@ -19,6 +19,20 @@ function App() {
   const [step3, setstep3] = useState(false);
   const [val, setVal] = useState("");
   const [redNote, setRedNote] = useState("");
+  const [step, setStep] = useState(1);
+
+  function incrementCount(e) {
+    e.preventDefault();
+    let count = visa + 1;
+    setVisa(count);
+  }
+  function decrementCount(e) {
+    e.preventDefault();
+    if (visa != 0) {
+      let count = visa - 1;
+      setVisa(count);
+    }
+  }
 
   const processNumber = (isValid, phone, country) => {
     return `+${country.dialCode} ${phone}`;
@@ -58,14 +72,14 @@ function App() {
     {
       visa: 0,
       sh: 10,
-      spc: null,
+      // spc: null,
       shams: 8050,
       meydan: 13250,
     },
     {
       visa: 0,
       sh: 50,
-      spc: null,
+      // spc: null,
       shams: 8050,
       meydan: 13250,
     },
@@ -79,21 +93,21 @@ function App() {
     {
       visa: 1,
       sh: 7,
-      spc: 19168,
+      // spc: 19168,
       shams: 15550,
       meydan: 21000,
     },
     {
       visa: 1,
       sh: 10,
-      spc: null,
+      // spc: null,
       shams: 15550,
       meydan: 21000,
     },
     {
       visa: 1,
       sh: 50,
-      spc: null,
+      // spc: null,
       shams: 15550,
       meydan: 21000,
     },
@@ -114,14 +128,14 @@ function App() {
     {
       visa: "1+",
       sh: 10,
-      spc: null,
+      // spc: null,
       shams: 14723,
       meydan: 15150,
     },
     {
       visa: "1+",
       sh: 50,
-      spc: null,
+      // spc: null,
       shams: 14723,
       meydan: 15150,
     },
@@ -131,28 +145,28 @@ function App() {
     {
       visa: 0,
       sh: 5,
-      spc: 5750,
+      // spc: 5750,
       shams: 5750,
       meydan: 13250,
     },
     {
       visa: 0,
       sh: 7,
-      spc: 5750,
+      // spc: 5750,
       shams: 5750,
       meydan: 13250,
     },
     {
       visa: 0,
       sh: 10,
-      spc: null,
+      // spc: null,
       shams: 5750,
       meydan: 13250,
     },
     {
       visa: 0,
       sh: 50,
-      spc: null,
+      // spc: null,
       shams: 5750,
       meydan: 13250,
     },
@@ -166,49 +180,49 @@ function App() {
     {
       visa: 1,
       sh: 7,
-      spc: 16675,
+      // spc: 16675,
       shams: 15550,
       meydan: 21000,
     },
     {
       visa: 1,
       sh: 10,
-      spc: null,
+      // spc: null,
       shams: 15550,
       meydan: 21000,
     },
     {
       visa: 1,
       sh: 50,
-      spc: null,
+      // spc: null,
       shams: 15550,
       meydan: 21000,
     },
     {
       visa: "1+",
       sh: 5,
-      spc: 11475,
+      // spc: 11475,
       shams: 14723,
       meydan: 15150,
     },
     {
       visa: "1+",
       sh: 7,
-      spc: 11475,
+      // spc: 11475,
       shams: 14723,
       meydan: 15150,
     },
     {
       visa: "1+",
       sh: 10,
-      spc: null,
+      // spc: null,
       shams: 14723,
       meydan: 15150,
     },
     {
       visa: "1+",
       sh: 50,
-      spc: null,
+      // spc: null,
       shams: 14723,
       meydan: 15150,
     },
@@ -342,14 +356,15 @@ function App() {
       setRedNote("Please fill Shareholder Field");
     }
 
-    if (visa == "") {
-      setRedNote("Please fill Visa Field");
-    }
+    // if (visa == "") {
+    //   setRedNote("Please fill Visa Field");
+    // }
 
-    if (activity != "" && shareHolders != "" && visa != "") {
+    if (activity != "" && shareHolders != "") {
       setstep1(false);
       setstep2(true);
       setRedNote("");
+      setStep(2);
     }
   };
 
@@ -371,17 +386,20 @@ function App() {
     if (name != "" && email != "" && phone != "") {
       setstep2(false);
       setstep3(true);
+      setStep(3);
     }
   };
 
   const back1 = () => {
     setstep1(true);
     setstep2(false);
+    setStep(1);
   };
 
   const back2 = () => {
     setstep2(true);
     setstep3(false);
+    setStep(2);
   };
 
   const onSwitchAction = () => {
@@ -636,91 +654,120 @@ function App() {
 
   return (
     <div className="App">
-      <section>
-        <div className="step-div">
-          <div className="circle-line"></div>
-          <div className="row pl-div">
-            <div className="progress-line"></div>
-          </div>
-          <div className="row prt-all-circle">
-            <div className="col-sm-4 all-circle">
-              <div className="circle-div">
-                <div className="small-circle active" id="sc-1"></div>
-              </div>
-              <p>Step 1</p>
-            </div>
-            <div className="col-sm-4 all-circle">
-              <div className="circle-div">
-                <div className="small-circle " id="sc-2"></div>
-              </div>
-              <p>Step 2</p>
-            </div>
-            <div className="col-sm-4 all-circle">
-              <div className="circle-div">
-                <div className="small-circle" id="sc-3"></div>
-              </div>
-              <p>Step 3</p>
-            </div>
-          </div>
-        </div>
-        <form>
+      <section style={{ minHeight: "100vh" }}>
+        <div className="row" style={{ minHeight: "100vh" }}>
           <div
-            className="step-1 form-box py-5"
-            style={{ display: step1 ? "block" : "none" }}
+            className="offset-md-1 col-md-6  col-sm-12"
+            style={{
+              minHeight: "100vh",
+              display: "flex",
+              flexDirection: "column",
+              placeContent: "end",
+            }}
           >
-            <Form.Check
-              reverse
-              type="switch"
-              className="switch-001"
-              id="custom-switch"
-              label="Do you require phyiscal office space?"
-              onChange={onSwitchAction}
-              checked={isSwitchOn}
-            />
-            <Form.Group className="my-3" controlId="formBasicActivities">
-              <Form.Label>Activities</Form.Label>
-              <Form.Select
-                aria-label="Default select example"
-                onChange={(e) => {
-                  selectHandler(e.target.value);
-                }}
+            <h2
+              style={{
+                fontSize: "60px",
+                fontWeight: "bold",
+                marginBottom: "30px",
+              }}
+            >
+              Calculate <br />
+              Your Business <br /> Setup Fees
+            </h2>
+            <div className="step-div">
+              <div className="circle-line"></div>
+              <div className="row pl-div">
+                <div className="progress-line"></div>
+              </div>
+              <div className="row prt-all-circle">
+                <div className="col-sm-4 all-circle">
+                  <div className="circle-div">
+                    <div
+                      className={`small-circle ${step === 1 ? "active" : null}`}
+                      id="sc-1"
+                    ></div>
+                  </div>
+                  <p>Step 1</p>
+                </div>
+                <div className="col-sm-4 all-circle">
+                  <div className="circle-div">
+                    <div
+                      className={`small-circle ${step === 2 ? "active" : null}`}
+                      id="sc-2"
+                    ></div>
+                  </div>
+                  <p>Step 2</p>
+                </div>
+                <div className="col-sm-4 all-circle">
+                  <div className="circle-div">
+                    <div
+                      className={`small-circle ${step === 3 ? "active" : null}`}
+                      id="sc-3"
+                    ></div>
+                  </div>
+                  <p>Step 3</p>
+                </div>
+              </div>
+            </div>
+            <form>
+              <div
+                className="step-1 form-box py-5"
+                style={{ display: step1 ? "block" : "none" }}
               >
-                <option>Open this select menu</option>
-                {!isSwitchOn &&
-                  standardActivity.map((item) => (
-                    <option key={item} value={item}>
-                      {item}
-                    </option>
-                  ))}
-                {!isSwitchOn &&
-                  mediaActivity.map((item) => (
-                    <option key={item} value={item}>
-                      {item}
-                    </option>
-                  ))}
-                {!isSwitchOn &&
-                  generalActivity.map((item) => (
-                    <option key={item} value={item}>
-                      {item}
-                    </option>
-                  ))}
-                {isSwitchOn &&
-                  mainland1.map((item) => (
-                    <option key={item} value={item}>
-                      {item}
-                    </option>
-                  ))}
-                {isSwitchOn &&
-                  mainland2.map((item) => (
-                    <option key={item} value={item}>
-                      {item}
-                    </option>
-                  ))}
-              </Form.Select>
-            </Form.Group>
-            <div className="mt-3 nbr-div-1">
-              <label>No of ShareHolders</label>
-              {/* <input
+                <Form.Check
+                  reverse
+                  type="switch"
+                  className="switch-001"
+                  id="custom-switch"
+                  label="Do you require phyiscal office space?"
+                  onChange={onSwitchAction}
+                  checked={isSwitchOn}
+                />
+                <Form.Group className="my-3" controlId="formBasicActivities">
+                  <Form.Label>Activities</Form.Label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      selectHandler(e.target.value);
+                    }}
+                  >
+                    <option>Open this select menu</option>
+                    {!isSwitchOn &&
+                      standardActivity.map((item) => (
+                        <option key={item} value={item}>
+                          {item}
+                        </option>
+                      ))}
+                    {!isSwitchOn &&
+                      mediaActivity.map((item) => (
+                        <option key={item} value={item}>
+                          {item}
+                        </option>
+                      ))}
+                    {!isSwitchOn &&
+                      generalActivity.map((item) => (
+                        <option key={item} value={item}>
+                          {item}
+                        </option>
+                      ))}
+                    {isSwitchOn &&
+                      mainland1.map((item) => (
+                        <option key={item} value={item}>
+                          {item}
+                        </option>
+                      ))}
+                    {isSwitchOn &&
+                      mainland2.map((item) => (
+                        <option key={item} value={item}>
+                          {item}
+                        </option>
+                      ))}
+                  </Form.Select>
+                </Form.Group>
+                <div className="mt-3 nbr-div-1">
+                  <label>No of ShareHolders</label>
+                  {/* <input
                 type="number"
                 min={1}
                 max={50}
@@ -728,84 +775,109 @@ function App() {
                   setShareHolders(e.target.value);
                 }}
               /> */}
-              <Form.Select
-                aria-label="Default select example"
-                onChange={(e) => {
-                  setShareHolders(e.target.value);
-                }}
-                style={{ width: "40%" }}
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setShareHolders(e.target.value);
+                    }}
+                    style={{ width: "40%" }}
+                  >
+                    <option value={5}>Upto 5</option>
+                    <option value={7}>Upto 7</option>
+                    <option value={10}>Upto 10</option>
+                    <option value={50}>Upto 50</option>
+                  </Form.Select>
+                </div>
+                <div className="mt-3 nbr-div-1">
+                  <label>No of Visa</label>
+                  {/* <input
+                    type="number"
+                    className="cst-input"
+                    min={0}
+                    max={50}
+                    onChange={(e) => {
+                      setVisa(e.target.value);
+                    }}
+                    style={{ width: "40%" }}
+                  /> */}
+
+                  <div style={{ display: "flex", justifyContent: "end" }}>
+                    <button
+                      style={{ border: "none", borderRadius: "15px" }}
+                      onClick={(e) => {
+                        decrementCount(e);
+                      }}
+                    >
+                      -
+                    </button>
+                    <input
+                      className="visa-input"
+                      value={visa}
+                      style={{ width: "30%", margin: "0 10px" }}
+                    />
+
+                    <button
+                      style={{ border: "none", borderRadius: "15px" }}
+                      onClick={(e) => {
+                        incrementCount(e);
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <p style={{ color: "red" }}>{redNote}</p>
+                <div className="btn-div-01 mt-3">
+                  <button
+                    className="btn-cst-01"
+                    onClick={(e) => {
+                      next1(e);
+                    }}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+              <div
+                className="step-2 form-box pb-5"
+                style={{ display: step2 ? "block" : "none" }}
               >
-                <option value={5}>Upto 5</option>
-                <option value={7}>Upto 7</option>
-                <option value={10}>Upto 10</option>
-                <option value={50}>Upto 50</option>
-              </Form.Select>
-            </div>
-            <div className="mt-3 nbr-div-1">
-              <label>No of Visa</label>
-              <input
-                type="number"
-                className="cst-input"
-                min={0}
-                max={50}
-                onChange={(e) => {
-                  setVisa(e.target.value);
-                }}
-                style={{ width: "40%" }}
-              />
-            </div>
-            <p style={{ color: "red" }}>{redNote}</p>
-            <div className="btn-div-01 mt-3">
-              <button
-                className="btn-cst-01"
-                onClick={(e) => {
-                  next1(e);
-                }}
-              >
-                Next
-              </button>
-            </div>
-          </div>
-          <div
-            className="step-2 form-box pb-5"
-            style={{ display: step2 ? "block" : "none" }}
-          >
-            <div
-              className="back-div"
-              onClick={() => {
-                back1();
-              }}
-            >
-              <img src="assets/back.png" width={"15px"} />
-            </div>
-            <h2>
-              One more
-              <br />
-              step to go!
-            </h2>
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Control
-                className="cst-input2"
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Control
-                className="cst-input2"
-                type="email"
-                name="email"
-                placeholder="Enter Email"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-            </Form.Group>
-            {/* <Form.Group className="mb-3" controlId="formBasicPhone">
+                <div
+                  className="back-div"
+                  onClick={() => {
+                    back1();
+                  }}
+                >
+                  <img src="assets/back.png" width={"15px"} />
+                </div>
+                <h2>
+                  One more
+                  <br />
+                  step to go!
+                </h2>
+                <Form.Group className="mb-3" controlId="formBasicName">
+                  <Form.Control
+                    className="cst-input2"
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Control
+                    className="cst-input2"
+                    type="email"
+                    name="email"
+                    placeholder="Enter Email"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                  />
+                </Form.Group>
+                {/* <Form.Group className="mb-3" controlId="formBasicPhone">
               <Form.Control
                 className="cst-input2"
                 type="number"
@@ -815,90 +887,97 @@ function App() {
                 }}
               />
             </Form.Group> */}
-            <IntlTelInput
-              containerClassName="intl-tel-input"
-              inputClassName="form-control"
-              placeholder="Enter Phone Number"
-              onPhoneNumberChange={(isValid, phone, country) => {
-                setPhone(processNumber(isValid, phone, country));
-              }}
-            />
+                <IntlTelInput
+                  containerClassName="intl-tel-input"
+                  inputClassName="form-control"
+                  placeholder="Enter Phone Number"
+                  onPhoneNumberChange={(isValid, phone, country) => {
+                    setPhone(processNumber(isValid, phone, country));
+                  }}
+                />
 
-            <p style={{ color: "red" }}>{redNote}</p>
-            <div className="btn-div-01 mt-3">
-              <button
-                className="btn-cst-01"
-                onClick={(e) => {
-                  next2(e);
-                  formhandler(e);
-                }}
-              >
-                Next
-              </button>
-            </div>
-          </div>
-          <div
-            className="step-3 form-box py-5"
-            style={{ display: step3 ? "block" : "none" }}
-          >
-            <div
-              className="back-div"
-              onClick={() => {
-                back2();
-              }}
-            >
-              <img src="assets/back.png" width={"15px"} />
-            </div>
-            <h4>{name}</h4>
-            <h3>{email}</h3>
-            <h3>{phone}</h3>
-            <div className="d-flex result-row">
-              <div>Number of ShareHolders :</div>
-              <div>{shareHolders}</div>
-            </div>
-            <div className="d-flex result-row">
-              <div>Number of Visa</div>
-              <div>{visa}</div>
-            </div>
-
-            <div
-              className=" result-row"
-              style={{ display: isSwitchOn ? "none" : "flex" }}
-            >
-              <div>Pirce for Meydan</div>
-              <div>{val.meydan}</div>
-            </div>
-            {val.spc >= val.shams ? (
-              <div
-                className="result-row"
-                style={{ display: isSwitchOn ? "none" : "flex" }}
-              >
-                <div>Pirce for SPC</div>
-                <div>{val.spc}</div>
+                <p style={{ color: "red" }}>{redNote}</p>
+                <div className="btn-div-01 mt-3">
+                  <button
+                    className="btn-cst-01"
+                    onClick={(e) => {
+                      next2(e);
+                      formhandler(e);
+                    }}
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
-            ) : (
               <div
-                className=" result-row"
-                style={{ display: isSwitchOn ? "none" : "flex" }}
+                className="step-3 form-box pb-5"
+                style={{ display: step3 ? "block" : "none" }}
               >
-                <div>Pirce for Shams</div>
-                <div>{val.shams}</div>
+                <div
+                  className="back-div"
+                  onClick={() => {
+                    back2();
+                  }}
+                >
+                  <img src="assets/back.png" width={"15px"} />
+                </div>
+                <h4>{name}</h4>
+                <h3 style={{ fontSize: "18px" }}>{email}</h3>
+                <h3 style={{ fontSize: "18px" }}>{phone}</h3>
+                <div className="d-flex result-row">
+                  <div>Number of ShareHolders :</div>
+                  <div>{shareHolders}</div>
+                </div>
+                <div className="d-flex result-row">
+                  <div>Number of Visa</div>
+                  <div>{visa}</div>
+                </div>
+
+                <div
+                  className=" result-row"
+                  style={{ display: isSwitchOn ? "none" : "flex" }}
+                >
+                  <div>Pirce for Meydan</div>
+                  <div>{val.meydan}</div>
+                </div>
+                {val.spc ? (
+                  <div
+                    className="result-row"
+                    style={{ display: isSwitchOn ? "none" : "flex" }}
+                  >
+                    <div>Pirce for SPC</div>
+                    <div>{val.spc}</div>
+                  </div>
+                ) : (
+                  <div
+                    className=" result-row"
+                    style={{ display: isSwitchOn ? "none" : "flex" }}
+                  >
+                    <div>Pirce for Shams</div>
+                    <div>{val.shams}</div>
+                  </div>
+                )}
+
+                <div
+                  className=" result-row"
+                  style={{ display: isSwitchOn ? "flex" : "none" }}
+                >
+                  <div>Pirce for DED</div>
+                  <div>{val.DED}</div>
+                </div>
+
+                <div className="scrach-card">
+                  <ScratchCard {...settings}>{randomize(arr)}</ScratchCard>
+                </div>
+
+                <textarea
+                  className="cal-testarea"
+                  placeholder="Tell us more about your intended"
+                ></textarea>
               </div>
-            )}
-
-            <div
-              className=" result-row"
-              style={{ display: isSwitchOn ? "flex" : "none" }}
-            >
-              <div>Pirce for DED</div>
-              <div>{val.DED}</div>
-            </div>
-
-            <div className="scrach-card">
-              <ScratchCard {...settings}>{randomize(arr)}</ScratchCard>
-            </div>
+            </form>
           </div>
-        </form>
+        </div>
       </section>
     </div>
   );

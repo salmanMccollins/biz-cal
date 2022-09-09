@@ -3,6 +3,9 @@
   overflow: hidden;
   /* width: 40%; */
   background: #E2E0E1;
+  background-image: url("/public/assets/shutterstock_2111171525\ \(1\).png");
+  min-height: 100vh;
+  background-size: cover;
 }
 .all-circle {
   width: 100%;
@@ -58,7 +61,7 @@
   min-width: 300px;
   max-width: 450px;
   padding: 20px;
-  margin: auto;
+  /* margin: auto; */
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 40px;
@@ -105,9 +108,9 @@
   background: #97C6CA;
   border-radius: 10px;
   width: 50px;
-  padding: 10px;
+  padding: 2px;
   text-align: center;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   cursor: pointer;
 }
 
@@ -192,4 +195,25 @@
 
 .intl-tel-input .country-list li {
   color: #000;
+}
+
+.visa-input {
+  width: 40%;
+  margin: 0 10px;
+  border: none;
+  height: 30px;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+
+.visa-input:focus,.cal-testarea:focus {
+    outline: 0 none;
+}
+
+.cal-testarea {
+  width: 100%;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    padding: 10px;
 }
