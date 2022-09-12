@@ -47,9 +47,8 @@ function App() {
   }, [val]);
 
   const settings = {
-    width: 200,
-    height: 100,
-    image: "assets/scrachBg.jpeg",
+    width: 300,
+    image: "assets/scrachBg.png",
     finishPercent: 50,
     onComplete: () => console.log("The card is now clear!"),
   };
@@ -671,6 +670,7 @@ function App() {
                 fontWeight: "bold",
                 marginBottom: "30px",
               }}
+              className="head-h2"
             >
               Calculate <br />
               Your Business <br /> Setup Fees
@@ -765,22 +765,13 @@ function App() {
                       ))}
                   </Form.Select>
                 </Form.Group>
-                <div className="mt-3 nbr-div-1">
-                  <label>No of ShareHolders</label>
-                  {/* <input
-                type="number"
-                min={1}
-                max={50}
-                onChange={(e) => {
-                  setShareHolders(e.target.value);
-                }}
-              /> */}
+                <div className="mt-3 ">
+                  <Form.Label>No of Shareholder</Form.Label>
                   <Form.Select
                     aria-label="Default select example"
                     onChange={(e) => {
                       setShareHolders(e.target.value);
                     }}
-                    style={{ width: "40%" }}
                   >
                     <option value={5}>Upto 5</option>
                     <option value={7}>Upto 7</option>
@@ -788,22 +779,20 @@ function App() {
                     <option value={50}>Upto 50</option>
                   </Form.Select>
                 </div>
-                <div className="mt-3 nbr-div-1">
-                  <label>No of Visa</label>
-                  {/* <input
-                    type="number"
-                    className="cst-input"
-                    min={0}
-                    max={50}
-                    onChange={(e) => {
-                      setVisa(e.target.value);
-                    }}
-                    style={{ width: "40%" }}
-                  /> */}
+                <div className="mt-3 ">
+                  <Form.Label>No of Visa</Form.Label>
 
-                  <div style={{ display: "flex", justifyContent: "end" }}>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
                     <button
-                      style={{ border: "none", borderRadius: "15px" }}
+                      style={{
+                        border: "none",
+                        borderRadius: "15px",
+                        background: "transparent",
+                        border: "2px solid #fff",
+                        color: "#fff",
+                      }}
                       onClick={(e) => {
                         decrementCount(e);
                       }}
@@ -813,11 +802,23 @@ function App() {
                     <input
                       className="visa-input"
                       value={visa}
-                      style={{ width: "30%", margin: "0 10px" }}
+                      style={{
+                        width: "75%",
+                        margin: "0 10px",
+                        background: "transparent",
+                        border: "2px solid #fff",
+                        color: "#fff",
+                      }}
                     />
 
                     <button
-                      style={{ border: "none", borderRadius: "15px" }}
+                      style={{
+                        border: "none",
+                        borderRadius: "15px",
+                        background: "transparent",
+                        border: "2px solid #fff",
+                        color: "#fff",
+                      }}
                       onClick={(e) => {
                         incrementCount(e);
                       }}
@@ -910,7 +911,7 @@ function App() {
                 </div>
               </div>
               <div
-                className="step-3 form-box pb-5"
+                className="step-3 form-box pb-4"
                 style={{ display: step3 ? "block" : "none" }}
               >
                 <div
@@ -921,59 +922,72 @@ function App() {
                 >
                   <img src="assets/back.png" width={"15px"} />
                 </div>
-                <h4>{name}</h4>
-                <h3 style={{ fontSize: "18px" }}>{email}</h3>
-                <h3 style={{ fontSize: "18px" }}>{phone}</h3>
-                <div className="d-flex result-row">
-                  <div>Number of ShareHolders :</div>
-                  <div>{shareHolders}</div>
-                </div>
-                <div className="d-flex result-row">
-                  <div>Number of Visa</div>
-                  <div>{visa}</div>
-                </div>
+                <div className="result-info">
+                  <h3 style={{ fontSize: "18px" }}>{name}</h3>
+                  <h3 style={{ fontSize: "18px" }}>{email}</h3>
+                  <h3 style={{ fontSize: "18px" }}>{phone}</h3>
 
-                <div
-                  className=" result-row"
-                  style={{ display: isSwitchOn ? "none" : "flex" }}
-                >
-                  <div>Pirce for Meydan</div>
-                  <div>{val.meydan}</div>
-                </div>
-                {val.spc ? (
-                  <div
-                    className="result-row"
-                    style={{ display: isSwitchOn ? "none" : "flex" }}
-                  >
-                    <div>Pirce for SPC</div>
-                    <div>{val.spc}</div>
+                  <hr style={{ marginBottom: "10px", marginTop: "10px" }} />
+
+                  <div className="d-flex result-row">
+                    <div>No of ShareHolders :</div>
+                    <div>{shareHolders}</div>
                   </div>
-                ) : (
+                  <div className="d-flex result-row">
+                    <div>Number of Visa</div>
+                    <div>{visa}</div>
+                  </div>
+
                   <div
                     className=" result-row"
                     style={{ display: isSwitchOn ? "none" : "flex" }}
                   >
-                    <div>Pirce for Shams</div>
-                    <div>{val.shams}</div>
+                    <div>Pirce for Meydan</div>
+                    <div>AED {val.meydan}</div>
                   </div>
-                )}
+                  {val.spc ? (
+                    <div
+                      className="result-row"
+                      style={{ display: isSwitchOn ? "none" : "flex" }}
+                    >
+                      <div>Pirce for SPC</div>
+                      <div>AED {val.spc}</div>
+                    </div>
+                  ) : (
+                    <div
+                      className=" result-row"
+                      style={{ display: isSwitchOn ? "none" : "flex" }}
+                    >
+                      <div>Pirce for Shams</div>
+                      <div>AED {val.shams}</div>
+                    </div>
+                  )}
 
-                <div
-                  className=" result-row"
-                  style={{ display: isSwitchOn ? "flex" : "none" }}
-                >
-                  <div>Pirce for DED</div>
-                  <div>{val.DED}</div>
+                  <div
+                    className=" result-row"
+                    style={{ display: isSwitchOn ? "flex" : "none" }}
+                  >
+                    <div>Pirce for DED</div>
+                    <div>{val.DED}</div>
+                  </div>
                 </div>
 
                 <div className="scrach-card">
                   <ScratchCard {...settings}>{randomize(arr)}</ScratchCard>
                 </div>
 
-                <textarea
-                  className="cal-testarea"
-                  placeholder="Tell us more about your intended"
-                ></textarea>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <textarea
+                    className="cal-testarea"
+                    placeholder="Tell us more about your intended"
+                  ></textarea>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <button className="btn-cst-02">GET A CALL</button>
+                  <a style={{ textAlign: "center", cursor: "pointer" }}>
+                    Send quotation by email
+                  </a>
+                </div>
               </div>
             </form>
           </div>
