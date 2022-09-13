@@ -1078,7 +1078,7 @@ function App() {
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <textarea
                     className="cal-testarea"
-                    placeholder="Tell us more about your intended"
+                    placeholder="Leave your message here"
                     onChange={(e) => {
                       setTextArea(e.target.value);
                     }}

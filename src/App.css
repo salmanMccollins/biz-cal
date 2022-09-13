@@ -224,14 +224,19 @@
 
 .visa-input:focus,.cal-testarea:focus {
     outline: 0 none;
+
+}
+
+.cal-testarea:focus::placeholder {
+  color: transparent;
 }
 
 .cal-testarea {
-  width: 60%;
+    width: 60%;
     border-radius: 10px;
     border: 1px solid #fff;
     padding: 10px;
-        background: transparent;
+    background: transparent;
     border-radius: 20px;
     text-align: center;
     color: #fff;
@@ -239,7 +244,7 @@
 
 .cal-testarea::placeholder {
   color: #fff;
-  padding: 0 40px;
+  padding: 0 10px;
 }
 
 .step-1 .form-select {
