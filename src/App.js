@@ -14,12 +14,14 @@ function App() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [textarea, setTextArea] = useState("");
   const [step1, setstep1] = useState(true);
   const [step2, setstep2] = useState(false);
   const [step3, setstep3] = useState(false);
   const [val, setVal] = useState("");
   const [redNote, setRedNote] = useState("");
   const [step, setStep] = useState(1);
+  const [scrachText, setScrachText] = useState(true);
 
   function incrementCount(e) {
     e.preventDefault();
@@ -48,6 +50,7 @@ function App() {
 
   const settings = {
     width: 300,
+    height: 50,
     image: "assets/scrachBg.png",
     finishPercent: 50,
     onComplete: () => console.log("The card is now clear!"),
@@ -347,8 +350,41 @@ function App() {
   const next1 = (e) => {
     e.preventDefault();
 
-    if (activity == "") {
+    const sel2 = document.getElementById("select2");
+
+    if (!isSwitchOn) {
+      standardActivity.find((element) => {
+        if (element === sel2.value) {
+          setActivity("Standard Activity");
+        }
+      });
+      mediaActivity.find((element) => {
+        if (element === sel2.value) {
+          setActivity("Media Activity");
+        }
+      });
+      generalActivity.find((element) => {
+        if (element === sel2.value) {
+          setActivity("General Activity");
+        }
+      });
+    }
+    if (isSwitchOn) {
+      mainland1.find((element) => {
+        if (element === sel2.value) {
+          setActivity("Mainland Standard Activity");
+        }
+      });
+      mainland2.find((element) => {
+        if (element === sel2.value) {
+          setActivity("Mainland Trading Activity");
+        }
+      });
+    }
+
+    if (sel2.value == "Open this select menu") {
       setRedNote("Please fill all Fiels");
+      return;
     }
 
     if (shareHolders == "") {
@@ -359,7 +395,7 @@ function App() {
     //   setRedNote("Please fill Visa Field");
     // }
 
-    if (activity != "" && shareHolders != "") {
+    if (shareHolders != "") {
       setstep1(false);
       setstep2(true);
       setRedNote("");
@@ -523,6 +559,20 @@ function App() {
   function randomize(myArray) {
     return myArray[Math.floor(Math.random() * myArray.length)];
   }
+
+  function senddata(e) {
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("physical space", isSwitchOn);
+    formData.append("activity", activity);
+    formData.append("shareholder", shareHolders);
+    formData.append("visa", visa);
+    formData.append("textarea", textarea);
+  }
+
   const standardActivity = [
     "Accounting & Auditing",
     "Atuomobile trading",
@@ -651,6 +701,8 @@ function App() {
     "Wholesale of household goods",
   ];
 
+  function select2() {}
+
   return (
     <div className="App">
       <section style={{ minHeight: "100vh" }}>
@@ -724,7 +776,7 @@ function App() {
                   onChange={onSwitchAction}
                   checked={isSwitchOn}
                 />
-                <Form.Group className="my-3" controlId="formBasicActivities">
+                {/* <Form.Group className="my-3" controlId="formBasicActivities">
                   <Form.Label>Activities</Form.Label>
                   <Form.Select
                     aria-label="Default select example"
@@ -764,7 +816,45 @@ function App() {
                         </option>
                       ))}
                   </Form.Select>
-                </Form.Group>
+                </Form.Group> */}
+                <select
+                  className="js-example-basic-single form-select"
+                  name="state"
+                  id="select2"
+                >
+                  <option>Open this select menu</option>
+                  {!isSwitchOn &&
+                    standardActivity.map((item) => (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  {!isSwitchOn &&
+                    mediaActivity.map((item) => (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  {!isSwitchOn &&
+                    generalActivity.map((item) => (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  {isSwitchOn &&
+                    mainland1.map((item) => (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  {isSwitchOn &&
+                    mainland2.map((item) => (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                </select>
+
                 <div className="mt-3 ">
                   <Form.Label>No of Shareholder</Form.Label>
                   <Form.Select
@@ -833,6 +923,7 @@ function App() {
                     className="btn-cst-01"
                     onClick={(e) => {
                       next1(e);
+                      select2();
                     }}
                   >
                     Next
@@ -973,6 +1064,14 @@ function App() {
                 </div>
 
                 <div className="scrach-card">
+                  <p
+                    onMouseEnter={(e) => {
+                      setScrachText(false);
+                    }}
+                    style={{ display: scrachText ? "block" : "none" }}
+                  >
+                    Scratch Here
+                  </p>
                   <ScratchCard {...settings}>{randomize(arr)}</ScratchCard>
                 </div>
 
@@ -980,11 +1079,27 @@ function App() {
                   <textarea
                     className="cal-testarea"
                     placeholder="Tell us more about your intended"
+                    onChange={(e) => {
+                      setTextArea(e.target.value);
+                    }}
                   ></textarea>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <button className="btn-cst-02">GET A CALL</button>
-                  <a style={{ textAlign: "center", cursor: "pointer" }}>
+                  <button
+                    onClick={(e) => {
+                      senddata(e);
+                    }}
+                    className="btn-cst-02"
+                  >
+                    GET A CALL
+                  </button>
+                  <a
+                    style={{
+                      textAlign: "center",
+                      cursor: "pointer",
+                      textDecoration: "underline",
+                    }}
+                  >
                     Send quotation by email
                   </a>
                 </div>

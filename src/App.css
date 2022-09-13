@@ -146,6 +146,7 @@
 .scrach-card {
     margin: 20px;
     text-align: -webkit-center;
+    position: relative;
 }
 
 
@@ -258,6 +259,35 @@
   color:#000;
  }
 
+.step-1 .select2-selection {
+  border: 3px solid #fff;
+    border-radius: 25px;
+    background-color: transparent;
+    color: #fff;
+        height: 40px;
+
+}
+
+.step-1 .select2-selection__rendered {
+  color: #fff !important;
+  margin-top: 3px;
+}
+
+
+.step-1 .select2-selection:focus {
+  border: 3px solid #fff;
+  outline: none;
+}
+
+.step-1 .select2-selection::after {
+  border: 3px solid #fff;
+}
+
+.step-1  .select2-selection__arrow {
+  margin-top: 3px;
+}
+
+
  .result-info {
   width: 85%;
     display: flex;
@@ -300,4 +330,16 @@
   .scrach-card {
     margin: 20px 0;
   }
+}
+
+
+
+.scrach-card p {
+    position: absolute;
+    z-index: 9;
+    margin: auto;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 700;
 }
