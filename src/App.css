@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 .App {
   overflow: hidden;
@@ -400,14 +401,14 @@
 }
 
 .content-box h2 {
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 700;
   margin-bottom: 20px;
   margin-right: 50px;
 }
 
 .content-box p {
-  font-size: 23px;
+  font-size: 22px;
   font-weight: 500;
   width: 80%;
 }
@@ -421,7 +422,7 @@
 }
 
 .cal-div .cal-heading {
-    font-size: 40px;
+    font-size: 36px;
   font-weight: 700;
   margin-bottom: 20px;
 }
@@ -472,7 +473,7 @@
   }
 
   .content-box h2 {
-    font-size: 30px;
+    font-size: 26px;
   }
 
   .content-box p {
@@ -496,6 +497,6 @@
   }
 
   .cal-div .cal-heading {
-    font-size: 30px;
+    font-size: 26px;
   }
 }
