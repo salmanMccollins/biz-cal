@@ -3,7 +3,7 @@
   overflow: hidden;
   /* width: 40%; */
   background: #E2E0E1;
-  background-image: url("/public/assets/shutterstock_2111171525\ \(1\).png");
+  /* background-image: url("/public/assets/bg1.jpg"); */
   min-height: 100vh;
   background-size: cover;
 }
@@ -60,23 +60,26 @@
 .form-box {
   min-width: 300px;
   max-width: 450px;
+  min-height: 450px;
   padding: 20px;
   /* margin: auto; */
   margin-top: 20px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   border-radius: 40px;
   background: #0000004f;
-    color: #fff;
+  color: #fff;
+  backdrop-filter: blur(8px);
 }
 
 .form-box .switch-001 {
   text-align: left;
+  margin-bottom: 20px;
 }
 
 .form-box .switch-001 .form-check-input {
     width: 3em !important;
     height: 1.5em !important;
-    margin-top: 15px;
+    margin-top: 25px;
 }
 
 .form-box .switch-001 label {
@@ -112,6 +115,7 @@
 .btn-div-01 {
   display: flex;
   justify-content: center;
+  margin-top: 35px;
 }
 
 
@@ -210,7 +214,7 @@
 }
 
 .visa-input {
-  height: 30px;
+  height: 40px;
   padding: 0 10px;
       width: 80%;
     margin: 0px 10px;
@@ -229,13 +233,14 @@
 
 .cal-testarea:focus::placeholder {
   color: transparent;
+  padding: 10px;
 }
 
 .cal-testarea {
     width: 60%;
     border-radius: 10px;
     border: 1px solid #fff;
-    padding: 10px;
+    /* padding: 10px; */
     background: transparent;
     border-radius: 20px;
     text-align: center;
@@ -325,7 +330,7 @@
 
   .App {
         background-position: 65%;
-        padding: 20px;
+        /* padding: 20px; */
   }
 
   .App .head-h2 {
@@ -347,4 +352,150 @@
     margin-top: 10px;
     font-size: 20px;
     font-weight: 700;
+}
+
+
+
+
+/* new */
+
+.new-sec {
+  position: relative;
+}
+
+
+.main {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    padding: 75px 0 75px 0;
+}
+
+.main-row {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.bg-img {
+  min-height: 800px;
+  object-fit: cover;
+  object-position: 80% 38%;
+}
+
+.content-box {
+  background: #94BFC2;
+  height: 100%;
+  width: 95%;
+  border-bottom-right-radius: 80px;
+  border-top-right-radius: 80px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.content-box div {
+  max-width: 600px;
+}
+
+.content-box h2 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-right: 50px;
+}
+
+.content-box p {
+  font-size: 23px;
+  font-weight: 500;
+  width: 80%;
+}
+
+.cal-div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.cal-div .cal-heading {
+    font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.cal-div .step-circle {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.cal-div .step-circle div {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+
+
+@media (max-width: 1000px) {
+  
+  .cal-heading {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .step-circle {
+    justify-content: center;
+  }
+
+  .form-box {
+    margin: auto;
+  }
+  
+  .bg-img {
+    min-height: 1200px;
+  }
+
+  .select2-container {
+    width: 100% !important;
+  }
+
+  .cal-div {
+    justify-content: start;
+  }
+
+  .content-box {
+    width: 100%;
+  }
+
+  .content-box h2 {
+    font-size: 30px;
+  }
+
+  .content-box p {
+    font-size: 18px;
+  }
+
+  .main-row .col-lg-7 {
+    padding: 0;
+  }
+
+  .content-box {
+    padding: 5%;
+  }
+
+}
+
+@media (max-width: 400px) {
+    
+  .bg-img {
+    min-height: 1400px;
+  }
+
+  .cal-div .cal-heading {
+    font-size: 30px;
+  }
 }
