@@ -9,7 +9,7 @@ import "react-intl-tel-input/dist/main.css";
 function App() {
   const [isSwitchOn, setIsSwitchOn] = useState(false);
   const [activity, setActivity] = useState("");
-  const [shareHolders, setShareHolders] = useState(5);
+  const [shareHolders, setShareHolders] = useState(1);
   const [visa, setVisa] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -33,6 +33,19 @@ function App() {
     if (visa != 0) {
       let count = visa - 1;
       setVisa(count);
+    }
+  }
+
+  function incrementCountS(e) {
+    e.preventDefault();
+    let count = shareHolders + 1;
+    setShareHolders(count);
+  }
+  function decrementCountS(e) {
+    e.preventDefault();
+    if (shareHolders != 1) {
+      let count = shareHolders - 1;
+      setShareHolders(count);
     }
   }
 
@@ -441,38 +454,6 @@ function App() {
     setIsSwitchOn(!isSwitchOn);
   };
 
-  function selectHandler(item) {
-    if (!isSwitchOn) {
-      standardActivity.find((element) => {
-        if (element === item) {
-          setActivity("Standard Activity");
-        }
-      });
-      mediaActivity.find((element) => {
-        if (element === item) {
-          setActivity("Media Activity");
-        }
-      });
-      generalActivity.find((element) => {
-        if (element === item) {
-          setActivity("General Activity");
-        }
-      });
-    }
-    if (isSwitchOn) {
-      mainland1.find((element) => {
-        if (element === item) {
-          setActivity("Mainland Standard Activity");
-        }
-      });
-      mainland2.find((element) => {
-        if (element === item) {
-          setActivity("Mainland Trading Activity");
-        }
-      });
-    }
-  }
-
   const formhandler = (e) => {
     e.preventDefault();
     var visaTemp;
@@ -562,15 +543,33 @@ function App() {
 
   function senddata(e) {
     e.preventDefault();
-    let formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("physical space", isSwitchOn);
-    formData.append("activity", activity);
-    formData.append("shareholder", shareHolders);
-    formData.append("visa", visa);
-    formData.append("textarea", textarea);
+    // let formData = new FormData();
+    // formData.append("name", name);
+    // formData.append("email", email);
+    // formData.append("phone", phone);
+    // formData.append("physical space", isSwitchOn);
+    // formData.append("activity", activity);
+    // formData.append("shareholder", shareHolders);
+    // formData.append("visa", visa);
+    // formData.append("textarea", textarea);
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        phone: phone,
+        physical: isSwitchOn,
+        activity: activity,
+        shareholder: shareHolders,
+        visa: visa,
+        textarea: textarea,
+      }),
+    };
+    fetch("/api/form-submit", requestOptions).then((response) =>
+      response.json()
+    );
   }
 
   const standardActivity = [
@@ -776,47 +775,7 @@ function App() {
                   onChange={onSwitchAction}
                   checked={isSwitchOn}
                 />
-                {/* <Form.Group className="my-3" controlId="formBasicActivities">
-                  <Form.Label>Activities</Form.Label>
-                  <Form.Select
-                    aria-label="Default select example"
-                    onChange={(e) => {
-                      selectHandler(e.target.value);
-                    }}
-                  >
-                    <option>Open this select menu</option>
-                    {!isSwitchOn &&
-                      standardActivity.map((item) => (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                    {!isSwitchOn &&
-                      mediaActivity.map((item) => (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                    {!isSwitchOn &&
-                      generalActivity.map((item) => (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                    {isSwitchOn &&
-                      mainland1.map((item) => (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                    {isSwitchOn &&
-                      mainland2.map((item) => (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                  </Form.Select>
-                </Form.Group> */}
+
                 <select
                   className="js-example-basic-single form-select"
                   name="state"
@@ -855,7 +814,7 @@ function App() {
                     ))}
                 </select>
 
-                <div className="mt-3 ">
+                {/* <div className="mt-3 ">
                   <Form.Label>No of Shareholder</Form.Label>
                   <Form.Select
                     aria-label="Default select example"
@@ -868,6 +827,54 @@ function App() {
                     <option value={10}>Upto 10</option>
                     <option value={50}>Upto 50</option>
                   </Form.Select>
+                </div> */}
+                <div className="mt-3 ">
+                  <Form.Label>No of Shareholder</Form.Label>
+
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <button
+                      style={{
+                        border: "none",
+                        borderRadius: "15px",
+                        background: "transparent",
+                        border: "2px solid #fff",
+                        color: "#fff",
+                      }}
+                      onClick={(e) => {
+                        decrementCountS(e);
+                      }}
+                    >
+                      -
+                    </button>
+                    <input
+                      className="visa-input"
+                      value={shareHolders}
+                      style={{
+                        width: "75%",
+                        margin: "0 10px",
+                        background: "transparent",
+                        border: "2px solid #fff",
+                        color: "#fff",
+                      }}
+                    />
+
+                    <button
+                      style={{
+                        border: "none",
+                        borderRadius: "15px",
+                        background: "transparent",
+                        border: "2px solid #fff",
+                        color: "#fff",
+                      }}
+                      onClick={(e) => {
+                        incrementCountS(e);
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
                 <div className="mt-3 ">
                   <Form.Label>No of Visa</Form.Label>
