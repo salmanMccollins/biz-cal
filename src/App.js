@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import ScratchCard from "react-scratchcard";
 import IntlTelInput from "react-intl-tel-input";
 import "react-intl-tel-input/dist/main.css";
+import { motion } from "framer-motion";
 
 function App() {
   const [isSwitchOn, setIsSwitchOn] = useState(false);
@@ -710,15 +711,26 @@ function App() {
           <div className="row main-row">
             <div className="col-lg-7">
               <div className="content-box">
-                <div>
-                  <h2>Starting over or Starting out? Start with us.</h2>
-                  <p>
-                    Get the estimated cost of setting up your business in three
-                    quick and easy steps.
-                  </p>
-                </div>
+                <motion.div
+                  initial={{ x: -400, opacity: 0, scale: 0.5 }}
+                  animate={{
+                    x: 0,
+                    opacity: 1,
+                    scale: 1,
+                    transition: { duration: 0.5 },
+                  }}
+                >
+                  <div>
+                    <h2>Starting over or Starting out? Start with us.</h2>
+                    <p>
+                      Get the estimated cost of setting up your business in
+                      three quick and easy steps.
+                    </p>
+                  </div>
+                </motion.div>
               </div>
             </div>
+
             <div className="col-lg-5">
               <div className="cal-div">
                 <h2 className="cal-heading">
@@ -726,80 +738,99 @@ function App() {
                   <br /> Business Setup Fees
                 </h2>
                 <div className="step-circle">
-                  <div
-                    style={{ background: step1 ? "#97C6CA" : "#97c6ca7e" }}
-                  ></div>
-                  <div
-                    style={{ background: step2 ? "#97C6CA" : "#97c6ca7e" }}
-                  ></div>
-                  <div
-                    style={{ background: step3 ? "#97C6CA" : "#97c6ca7e" }}
-                  ></div>
+                  <motion.div animate={step1 ? { scale: 1.3 } : { scale: 1 }}>
+                    <div
+                      style={{ background: step1 ? "#97C6CA" : "#97c6ca7e" }}
+                    ></div>
+                  </motion.div>
+                  <motion.div animate={step2 ? { scale: 1.3 } : { scale: 1 }}>
+                    <div
+                      style={{ background: step2 ? "#97C6CA" : "#97c6ca7e" }}
+                    ></div>
+                  </motion.div>
+                  <motion.div animate={step3 ? { scale: 1.3 } : { scale: 1 }}>
+                    <div
+                      style={{ background: step3 ? "#97C6CA" : "#97c6ca7e" }}
+                    ></div>
+                  </motion.div>
                 </div>
                 <div className="cal-form-div">
                   <form>
-                    <div
-                      className="step-1 form-box"
-                      style={{
-                        display: step1 ? "block" : "none",
-                        paddingTop: "30px",
-                      }}
+                    <motion.div
+                      initial={{ x: 200, opacity: 0, scale: 0.5 }}
+                      whileInView={
+                        step1
+                          ? {
+                              x: 0,
+                              opacity: 1,
+                              scale: 1,
+                              transition: { duration: 0.5 },
+                            }
+                          : { x: 200, opacity: 0, scale: 0.5 }
+                      }
                     >
-                      <Form.Check
-                        reverse
-                        type="switch"
-                        className="switch-001"
-                        id="custom-switch"
-                        label="Do you require phyiscal office space?"
-                        onChange={onSwitchAction}
-                        checked={isSwitchOn}
-                      />
-
-                      <p style={{ marginBottom: "0.5rem" }}>
-                        {isSwitchOn
-                          ? "Business set up in Mainland"
-                          : "Business set up in Freezones"}
-                      </p>
-
-                      <select
-                        className="js-example-basic-single form-select"
-                        name="state"
-                        id="select2"
+                      <div
+                        className="step-1 form-box"
+                        style={{
+                          display: step1 ? "block" : "none",
+                          paddingTop: "30px",
+                        }}
                       >
-                        <option>Choose your business activity</option>
-                        {!isSwitchOn &&
-                          standardActivity.map((item) => (
-                            <option key={item} value={item}>
-                              {item}
-                            </option>
-                          ))}
-                        {!isSwitchOn &&
-                          mediaActivity.map((item) => (
-                            <option key={item} value={item}>
-                              {item}
-                            </option>
-                          ))}
-                        {!isSwitchOn &&
-                          generalActivity.map((item) => (
-                            <option key={item} value={item}>
-                              {item}
-                            </option>
-                          ))}
-                        {isSwitchOn &&
-                          mainland1.map((item) => (
-                            <option key={item} value={item}>
-                              {item}
-                            </option>
-                          ))}
-                        {isSwitchOn &&
-                          mainland2.map((item) => (
-                            <option key={item} value={item}>
-                              {item}
-                            </option>
-                          ))}
-                      </select>
+                        <Form.Check
+                          reverse
+                          type="switch"
+                          className="switch-001"
+                          id="custom-switch"
+                          label="Do you require phyiscal office space?"
+                          onChange={onSwitchAction}
+                          checked={isSwitchOn}
+                        />
 
-                      {/* <div className="mt-3 ">
+                        <p style={{ marginBottom: "0.5rem" }}>
+                          {isSwitchOn
+                            ? "Business set up in Mainland"
+                            : "Business set up in Freezones"}
+                        </p>
+
+                        <select
+                          className="js-example-basic-single form-select"
+                          name="state"
+                          id="select2"
+                        >
+                          <option>Choose your business activity</option>
+                          {!isSwitchOn &&
+                            standardActivity.map((item) => (
+                              <option key={item} value={item}>
+                                {item}
+                              </option>
+                            ))}
+                          {!isSwitchOn &&
+                            mediaActivity.map((item) => (
+                              <option key={item} value={item}>
+                                {item}
+                              </option>
+                            ))}
+                          {!isSwitchOn &&
+                            generalActivity.map((item) => (
+                              <option key={item} value={item}>
+                                {item}
+                              </option>
+                            ))}
+                          {isSwitchOn &&
+                            mainland1.map((item) => (
+                              <option key={item} value={item}>
+                                {item}
+                              </option>
+                            ))}
+                          {isSwitchOn &&
+                            mainland2.map((item) => (
+                              <option key={item} value={item}>
+                                {item}
+                              </option>
+                            ))}
+                        </select>
+
+                        {/* <div className="mt-3 ">
                   <Form.Label>No of Shareholder</Form.Label>
                   <Form.Select
                     aria-label="Default select example"
@@ -813,170 +844,185 @@ function App() {
                     <option value={50}>Upto 50</option>
                   </Form.Select>
                 </div> */}
-                      <div className="mt-3 ">
-                        <Form.Label>Number of Shareholder</Form.Label>
+                        <div className="mt-3 ">
+                          <Form.Label>Number of Shareholder</Form.Label>
 
-                        <div
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <button
+                              style={{
+                                border: "none",
+                                borderRadius: "15px",
+                                background: "transparent",
+                                border: "2px solid #fff",
+                                color: "#fff",
+                              }}
+                              onClick={(e) => {
+                                decrementCountS(e);
+                              }}
+                            >
+                              -
+                            </button>
+                            <input
+                              className="visa-input"
+                              value={shareHolders}
+                              style={{
+                                width: "75%",
+                                margin: "0 10px",
+                                background: "transparent",
+                                border: "2px solid #fff",
+                                color: "#fff",
+                              }}
+                            />
+
+                            <button
+                              style={{
+                                border: "none",
+                                borderRadius: "15px",
+                                background: "transparent",
+                                border: "2px solid #fff",
+                                color: "#fff",
+                              }}
+                              onClick={(e) => {
+                                incrementCountS(e);
+                              }}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                        <div className="mt-3 ">
+                          <Form.Label>Number of Visa</Form.Label>
+
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <button
+                              style={{
+                                border: "none",
+                                borderRadius: "15px",
+                                background: "transparent",
+                                border: "2px solid #fff",
+                                color: "#fff",
+                              }}
+                              onClick={(e) => {
+                                decrementCount(e);
+                              }}
+                            >
+                              -
+                            </button>
+                            <input
+                              className="visa-input"
+                              value={visa}
+                              style={{
+                                width: "75%",
+                                margin: "0 10px",
+                                background: "transparent",
+                                border: "2px solid #fff",
+                                color: "#fff",
+                              }}
+                            />
+
+                            <button
+                              style={{
+                                border: "none",
+                                borderRadius: "15px",
+                                background: "transparent",
+                                border: "2px solid #fff",
+                                color: "#fff",
+                              }}
+                              onClick={(e) => {
+                                incrementCount(e);
+                              }}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                        <p
                           style={{
-                            display: "flex",
-                            justifyContent: "space-between",
+                            color: "red",
+                            marginBottom: 0,
+                            marginTop: "5px",
+                            position: "absolute",
                           }}
                         >
+                          {redNote}
+                        </p>
+                        <div className="btn-div-01">
                           <button
-                            style={{
-                              border: "none",
-                              borderRadius: "15px",
-                              background: "transparent",
-                              border: "2px solid #fff",
-                              color: "#fff",
-                            }}
+                            className="btn-cst-01"
                             onClick={(e) => {
-                              decrementCountS(e);
+                              next1(e);
+                              select2();
                             }}
                           >
-                            -
-                          </button>
-                          <input
-                            className="visa-input"
-                            value={shareHolders}
-                            style={{
-                              width: "75%",
-                              margin: "0 10px",
-                              background: "transparent",
-                              border: "2px solid #fff",
-                              color: "#fff",
-                            }}
-                          />
-
-                          <button
-                            style={{
-                              border: "none",
-                              borderRadius: "15px",
-                              background: "transparent",
-                              border: "2px solid #fff",
-                              color: "#fff",
-                            }}
-                            onClick={(e) => {
-                              incrementCountS(e);
-                            }}
-                          >
-                            +
+                            Next
                           </button>
                         </div>
                       </div>
-                      <div className="mt-3 ">
-                        <Form.Label>Number of Visa</Form.Label>
+                    </motion.div>
 
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          <button
-                            style={{
-                              border: "none",
-                              borderRadius: "15px",
-                              background: "transparent",
-                              border: "2px solid #fff",
-                              color: "#fff",
-                            }}
-                            onClick={(e) => {
-                              decrementCount(e);
-                            }}
-                          >
-                            -
-                          </button>
-                          <input
-                            className="visa-input"
-                            value={visa}
-                            style={{
-                              width: "75%",
-                              margin: "0 10px",
-                              background: "transparent",
-                              border: "2px solid #fff",
-                              color: "#fff",
-                            }}
-                          />
-
-                          <button
-                            style={{
-                              border: "none",
-                              borderRadius: "15px",
-                              background: "transparent",
-                              border: "2px solid #fff",
-                              color: "#fff",
-                            }}
-                            onClick={(e) => {
-                              incrementCount(e);
-                            }}
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                      <p
-                        style={{
-                          color: "red",
-                          marginBottom: 0,
-                          marginTop: "5px",
-                          position: "absolute",
-                        }}
-                      >
-                        {redNote}
-                      </p>
-                      <div className="btn-div-01">
-                        <button
-                          className="btn-cst-01"
-                          onClick={(e) => {
-                            next1(e);
-                            select2();
-                          }}
-                        >
-                          Next
-                        </button>
-                      </div>
-                    </div>
-                    <div
-                      className="step-2 form-box pb-5"
-                      style={{ display: step2 ? "block" : "none" }}
+                    <motion.div
+                      initial={{ x: 100, opacity: 0, scale: 0.5 }}
+                      animate={
+                        step2
+                          ? {
+                              x: 0,
+                              opacity: 1,
+                              scale: 1,
+                              transition: { duration: 0.5 },
+                            }
+                          : { x: 200, opacity: 0, scale: 0.5 }
+                      }
                     >
                       <div
-                        className="back-div"
-                        onClick={() => {
-                          back1();
-                        }}
+                        className="step-2 form-box pb-5"
+                        style={{ display: step2 ? "block" : "none" }}
                       >
-                        <img src="assets/back.png" width={"15px"} />
-                      </div>
-                      <h2 style={{ marginTop: "20px" }}>
-                        One more
-                        <br />
-                        step to go!
-                      </h2>
-                      <Form.Group className="mb-4" controlId="formBasicName">
-                        <Form.Control
-                          className="cst-input2"
-                          type="text"
-                          name="name"
-                          placeholder="Your Name"
-                          onChange={(e) => {
-                            setName(e.target.value);
+                        <div
+                          className="back-div"
+                          onClick={() => {
+                            back1();
                           }}
-                        />
-                      </Form.Group>
-                      <Form.Group className="mb-4" controlId="formBasicEmail">
-                        <Form.Control
-                          className="cst-input2"
-                          type="email"
-                          name="email"
-                          placeholder="Enter Email"
-                          onChange={(e) => {
-                            setEmail(e.target.value);
-                          }}
-                        />
-                      </Form.Group>
-                      {/* <Form.Group className="mb-3" controlId="formBasicPhone">
+                        >
+                          <img src="assets/back.png" width={"15px"} />
+                        </div>
+                        <h2 style={{ marginTop: "20px" }}>
+                          One more
+                          <br />
+                          step to go!
+                        </h2>
+                        <Form.Group className="mb-4" controlId="formBasicName">
+                          <Form.Control
+                            className="cst-input2"
+                            type="text"
+                            name="name"
+                            placeholder="Your Name"
+                            onChange={(e) => {
+                              setName(e.target.value);
+                            }}
+                          />
+                        </Form.Group>
+                        <Form.Group className="mb-4" controlId="formBasicEmail">
+                          <Form.Control
+                            className="cst-input2"
+                            type="email"
+                            name="email"
+                            placeholder="Enter Email"
+                            onChange={(e) => {
+                              setEmail(e.target.value);
+                            }}
+                          />
+                        </Form.Group>
+                        {/* <Form.Group className="mb-3" controlId="formBasicPhone">
               <Form.Control
                 className="cst-input2"
                 type="number"
@@ -986,146 +1032,166 @@ function App() {
                 }}
               />
             </Form.Group> */}
-                      <IntlTelInput
-                        containerClassName="intl-tel-input"
-                        inputClassName="form-control"
-                        placeholder="Enter Phone Number"
-                        onPhoneNumberChange={(isValid, phone, country) => {
-                          setPhone(processNumber(isValid, phone, country));
-                        }}
-                      />
-
-                      <p
-                        style={{
-                          color: "red",
-                          marginBottom: 0,
-                          marginTop: "5px",
-                          position: "absolute",
-                        }}
-                      >
-                        {redNote}
-                      </p>
-                      <div className="btn-div-01" style={{ marginTop: "44px" }}>
-                        <button
-                          className="btn-cst-01"
-                          onClick={(e) => {
-                            next2(e);
-                            formhandler(e);
+                        <IntlTelInput
+                          containerClassName="intl-tel-input"
+                          inputClassName="form-control"
+                          placeholder="Enter Phone Number"
+                          onPhoneNumberChange={(isValid, phone, country) => {
+                            setPhone(processNumber(isValid, phone, country));
                           }}
-                        >
-                          Next
-                        </button>
-                      </div>
-                    </div>
-                    <div
-                      className="step-3 form-box pb-4"
-                      style={{ display: step3 ? "block" : "none" }}
-                    >
-                      <div
-                        className="back-div"
-                        onClick={() => {
-                          back2();
-                        }}
-                      >
-                        <img src="assets/back.png" width={"15px"} />
-                      </div>
-                      <div className="result-info">
-                        <h3 style={{ fontSize: "14px" }}>Name: {name}</h3>
-                        <h3 style={{ fontSize: "14px" }}>Email: {email}</h3>
-                        <h3 style={{ fontSize: "14px" }}>Phone: {phone}</h3>
-
-                        <hr
-                          style={{ marginBottom: "10px", marginTop: "10px" }}
                         />
 
-                        <div className="d-flex result-row">
-                          <div>No of ShareHolders :</div>
-                          <div>{shareHolders}</div>
-                        </div>
-                        <div className="d-flex result-row">
-                          <div>Number of Visa</div>
-                          <div>{visa}</div>
-                        </div>
-
-                        <div
-                          className=" result-row"
-                          style={{ display: isSwitchOn ? "none" : "flex" }}
+                        <p
+                          style={{
+                            color: "red",
+                            marginBottom: 0,
+                            marginTop: "5px",
+                            position: "absolute",
+                          }}
                         >
-                          <div>Pirce for Meydan</div>
-                          <div>AED {val.meydan}</div>
-                        </div>
-                        {val.spc ? (
-                          <div
-                            className="result-row"
-                            style={{ display: isSwitchOn ? "none" : "flex" }}
+                          {redNote}
+                        </p>
+                        <div
+                          className="btn-div-01"
+                          style={{ marginTop: "44px" }}
+                        >
+                          <button
+                            className="btn-cst-01"
+                            onClick={(e) => {
+                              next2(e);
+                              formhandler(e);
+                            }}
                           >
-                            <div>Pirce for SPC</div>
-                            <div>AED {val.spc}</div>
+                            Next
+                          </button>
+                        </div>
+                      </div>
+                    </motion.div>
+                    <motion.div
+                      initial={{ x: 100, opacity: 0, scale: 0.5 }}
+                      animate={
+                        step3
+                          ? {
+                              x: 0,
+                              opacity: 1,
+                              scale: 1,
+                              transition: { duration: 0.5 },
+                            }
+                          : { x: 200, opacity: 0, scale: 0.5 }
+                      }
+                    >
+                      <div
+                        className="step-3 form-box pb-4"
+                        style={{ display: step3 ? "block" : "none" }}
+                      >
+                        <div
+                          className="back-div"
+                          onClick={() => {
+                            back2();
+                          }}
+                        >
+                          <img src="assets/back.png" width={"15px"} />
+                        </div>
+                        <div className="result-info">
+                          <h3 style={{ fontSize: "14px" }}>Name: {name}</h3>
+                          <h3 style={{ fontSize: "14px" }}>Email: {email}</h3>
+                          <h3 style={{ fontSize: "14px" }}>Phone: {phone}</h3>
+
+                          <hr
+                            style={{ marginBottom: "10px", marginTop: "10px" }}
+                          />
+
+                          <div className="d-flex result-row">
+                            <div>No of ShareHolders :</div>
+                            <div>{shareHolders}</div>
                           </div>
-                        ) : (
+                          <div className="d-flex result-row">
+                            <div>Number of Visa</div>
+                            <div>{visa}</div>
+                          </div>
+
                           <div
                             className=" result-row"
                             style={{ display: isSwitchOn ? "none" : "flex" }}
                           >
-                            <div>Pirce for Shams</div>
-                            <div>AED {val.shams}</div>
+                            <div>Estimated cost for Meydan</div>
+                            <div>AED {val.meydan}</div>
                           </div>
-                        )}
+                          {val.spc ? (
+                            <div
+                              className="result-row"
+                              style={{ display: isSwitchOn ? "none" : "flex" }}
+                            >
+                              <div>Estimated cost for SPC</div>
+                              <div>AED {val.spc}</div>
+                            </div>
+                          ) : (
+                            <div
+                              className=" result-row"
+                              style={{ display: isSwitchOn ? "none" : "flex" }}
+                            >
+                              <div>Estimated cost for Shams</div>
+                              <div>AED {val.shams}</div>
+                            </div>
+                          )}
+
+                          <div
+                            className=" result-row"
+                            style={{ display: isSwitchOn ? "flex" : "none" }}
+                          >
+                            <div>Pirce for DED</div>
+                            <div>{val.DED}</div>
+                          </div>
+                        </div>
+
+                        <div className="scrach-card">
+                          <p
+                            onMouseEnter={(e) => {
+                              setScrachText(false);
+                            }}
+                            style={{ display: scrachText ? "block" : "none" }}
+                          >
+                            Scratch Here
+                          </p>
+                          <ScratchCard {...settings}>
+                            {randomize(arr)}
+                          </ScratchCard>
+                        </div>
 
                         <div
-                          className=" result-row"
-                          style={{ display: isSwitchOn ? "flex" : "none" }}
+                          style={{ display: "flex", justifyContent: "center" }}
                         >
-                          <div>Pirce for DED</div>
-                          <div>{val.DED}</div>
+                          <textarea
+                            className="cal-testarea"
+                            placeholder="Leave your message here"
+                            onChange={(e) => {
+                              setTextArea(e.target.value);
+                            }}
+                          ></textarea>
+                        </div>
+                        <div
+                          style={{ display: "flex", flexDirection: "column" }}
+                        >
+                          <button
+                            onClick={(e) => {
+                              senddata(e);
+                            }}
+                            className="btn-cst-02"
+                          >
+                            GET A CALL
+                          </button>
+                          <a
+                            style={{
+                              textAlign: "center",
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                            }}
+                          >
+                            Send quotation by email
+                          </a>
                         </div>
                       </div>
-
-                      <div className="scrach-card">
-                        <p
-                          onMouseEnter={(e) => {
-                            setScrachText(false);
-                          }}
-                          style={{ display: scrachText ? "block" : "none" }}
-                        >
-                          Scratch Here
-                        </p>
-                        <ScratchCard {...settings}>
-                          {randomize(arr)}
-                        </ScratchCard>
-                      </div>
-
-                      <div
-                        style={{ display: "flex", justifyContent: "center" }}
-                      >
-                        <textarea
-                          className="cal-testarea"
-                          placeholder="Leave your message here"
-                          onChange={(e) => {
-                            setTextArea(e.target.value);
-                          }}
-                        ></textarea>
-                      </div>
-                      <div style={{ display: "flex", flexDirection: "column" }}>
-                        <button
-                          onClick={(e) => {
-                            senddata(e);
-                          }}
-                          className="btn-cst-02"
-                        >
-                          GET A CALL
-                        </button>
-                        <a
-                          style={{
-                            textAlign: "center",
-                            cursor: "pointer",
-                            textDecoration: "underline",
-                          }}
-                        >
-                          Send quotation by email
-                        </a>
-                      </div>
-                    </div>
+                    </motion.div>
                   </form>
                 </div>
               </div>

@@ -312,7 +312,7 @@
     display: flex;
     margin: auto;
     flex-direction: column;
-    font-size: 16px;
+    font-size: 14px;
     padding: 0 25px;
  }
 
@@ -448,6 +448,10 @@
   border-radius: 50%;
   margin-right: 20px;
 }
+
+  .main-row .col-lg-7 {
+    padding-left: 0;
+  }
 
 
 
