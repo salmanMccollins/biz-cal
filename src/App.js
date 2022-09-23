@@ -1114,7 +1114,10 @@ function App() {
                             className=" result-row"
                             style={{ display: isSwitchOn ? "none" : "flex" }}
                           >
-                            <div>Estimated cost for Meydan</div>
+                            <div className="pcText">
+                              Estimated cost for Meydan
+                            </div>
+                            <div className="mobText">Est. cost for Meydan</div>
                             <div>AED {val.meydan}</div>
                           </div>
                           {val.spc ? (
@@ -1122,7 +1125,10 @@ function App() {
                               className="result-row"
                               style={{ display: isSwitchOn ? "none" : "flex" }}
                             >
-                              <div>Estimated cost for SPC</div>
+                              <div className="pcText">
+                                Estimated cost for SPC
+                              </div>
+                              <div className="mobText">Est. cost for SPC</div>
                               <div>AED {val.spc}</div>
                             </div>
                           ) : (
@@ -1130,7 +1136,10 @@ function App() {
                               className=" result-row"
                               style={{ display: isSwitchOn ? "none" : "flex" }}
                             >
-                              <div>Estimated cost for Shams</div>
+                              <div className="pcText">
+                                Estimated cost for Shams
+                              </div>
+                              <div className="mobText">Est. cost for Shams</div>
                               <div>AED {val.shams}</div>
                             </div>
                           )}

@@ -322,6 +322,15 @@
 
 
 
+ 
+  .pcText {
+    display: block;
+  }
+
+  .mobText {
+    display: none;
+  }
+
 
  
 @media (max-width: 580px) {
@@ -348,6 +357,14 @@
 
   .scrach-card {
     margin: 20px 0;
+  }
+
+  .pcText {
+    display: none;
+  }
+
+  .mobText {
+    display: block;
   }
 }
 
