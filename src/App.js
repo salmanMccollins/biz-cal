@@ -711,13 +711,10 @@ function App() {
             <div className="col-lg-7">
               <div className="content-box">
                 <div>
-                  <h2>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    praesent?
-                  </h2>
+                  <h2>Starting over or Starting out? Start with us.</h2>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Praesent a dolor a orci varius maximus.
+                    Get the estimated cost of setting up your business in three
+                    quick and easy steps.
                   </p>
                 </div>
               </div>
@@ -757,6 +754,12 @@ function App() {
                         onChange={onSwitchAction}
                         checked={isSwitchOn}
                       />
+
+                      <p style={{ marginBottom: "0.5rem" }}>
+                        {isSwitchOn
+                          ? "Business set up in Mainland"
+                          : "Business set up in Freezones"}
+                      </p>
 
                       <select
                         className="js-example-basic-single form-select"
@@ -810,7 +813,7 @@ function App() {
                     <option value={50}>Upto 50</option>
                   </Form.Select>
                 </div> */}
-                      <div className="mt-4 ">
+                      <div className="mt-3 ">
                         <Form.Label>Number of Shareholder</Form.Label>
 
                         <div
@@ -861,7 +864,7 @@ function App() {
                           </button>
                         </div>
                       </div>
-                      <div className="mt-4 ">
+                      <div className="mt-3 ">
                         <Form.Label>Number of Visa</Form.Label>
 
                         <div
@@ -1027,9 +1030,9 @@ function App() {
                         <img src="assets/back.png" width={"15px"} />
                       </div>
                       <div className="result-info">
-                        <h3 style={{ fontSize: "18px" }}>{name}</h3>
-                        <h3 style={{ fontSize: "18px" }}>{email}</h3>
-                        <h3 style={{ fontSize: "18px" }}>{phone}</h3>
+                        <h3 style={{ fontSize: "14px" }}>Name: {name}</h3>
+                        <h3 style={{ fontSize: "14px" }}>Email: {email}</h3>
+                        <h3 style={{ fontSize: "14px" }}>Phone: {phone}</h3>
 
                         <hr
                           style={{ marginBottom: "10px", marginTop: "10px" }}
